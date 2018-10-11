@@ -10,6 +10,7 @@ import { PlaceDashboardComponent } from './place-dashboard/place-dashboard.compo
 import { PlaceFindComponent } from './place-find/place-find.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from "ngx-pagination";
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     MatGridListModule,
     MatCardModule,
     MatMenuModule,

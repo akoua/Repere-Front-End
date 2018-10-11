@@ -1,8 +1,8 @@
 <div class="grid-container">
   <h1 class="mat-h1 text-alignement">Resultat de la recherche</h1>
   <mat-grid-list cols="2" rowHeight="350px">
-    <div *ngFor="let place of results">
-    <!-- <div *ngFor="let place of results | paginate: { itemsPerPage: 2, currentPage: p }"> -->
+    <!-- <div *ngFor="let place of results"> -->
+    <div *ngFor="let place of results | paginate: { itemsPerPage: 2, currentPage: p }">
         <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
             <mat-card class="dashboard-card">
               <mat-card-header>
@@ -25,6 +25,6 @@
     </div>      
   </mat-grid-list>   
 </div>
-<!-- <pagination-controls (pageChange)="p = $event"></pagination-controls>  -->
+<pagination-controls (pageChange)="p = $event"></pagination-controls> 
 
-{{results | json}}
+<!-- {{results | json}} -->
