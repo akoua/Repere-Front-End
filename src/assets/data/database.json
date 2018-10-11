@@ -1,0 +1,56 @@
+[
+{
+    "id":1,
+    "name": "chez papa",
+    "domaine": "restauration",
+    "position_geographique": "yopougon"
+},
+{
+    "id": 2,
+    "name": "Bcc",
+    "domaine": "Informatique",
+    "position_geographique": "cocody"
+},
+{
+    "id": 3,
+    "name": "AkouaPaper",
+    "domaine": "Papeterie",
+    "position_geographique": "Marcory"
+},
+{
+    "id": 4,
+    "name": "Abraham Corp",
+    "domaine": "Informatique",
+    "position_geographique": "Treichville"
+},
+{
+    "id": 5,
+    "name": "Zcc",
+    "domaine": "restauration",
+    "position_geographique": "abobo"
+},
+{
+    "id": 6,
+    "name": "BccZzz",
+    "domaine": "Informatique",
+    "position_geographique": "cocody"
+},
+{
+    "id": 7,
+    "name": "Akkk",
+    "domaine": "Informatique",
+    "position_geographique": "cocody"
+},
+{
+    "id": 8,
+    "name": "PPPP",
+    "domaine": "Informatique",
+    "position_geographique": "cocody"
+},
+{
+    "id": 9,
+    "name": "ZZZRr",
+    "domaine": "Informatique",
+    "position_geographique": "cocody"
+}
+]

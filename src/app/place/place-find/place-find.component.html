@@ -1,0 +1,76 @@
+<div *ngIf="!isSearch">
+  <mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Recherche</mat-card-title>
+  </mat-card-header>
+  <form class="example-form" [formGroup]="formFindPlace" (ngSubmit)="validerPlace(formFindPlace.value)">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Article" formControlName="term">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Domaine" formControlName="domaine">
+        <mat-option *ngFor="let domaine of domaines" [value]="domaine.value">
+          {{domaine.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Ville" aria-label="Number" matInput formControlName="positionGeo" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let ville of villesOptions$ | async" [value]="ville.value">
+          {{ville.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <!-- <mat-slide-toggle
+    [checked]="stateCtrl.disabled"
+    (change)="stateCtrl.disabled ? stateCtrl.enable() : stateCtrl.disable()">
+    Disable Input?
+  </mat-slide-toggle> -->
+  <mat-slide-toggle  
+  (click)="positionValid()"
+  formControlName="positionAccept">
+      utiliser ma position géographique
+  </mat-slide-toggle>
+
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit">Rechercher</button>
+    </div>
+  </form>
+</mat-card>
+</div>
+
+<div *ngIf="isSearch">
+    <form class="example-form2" [formGroup]="formFindPlace" (ngSubmit)="validerPlace(formFindPlace.value)">
+        <mat-form-field class="espacement">
+          <input matInput placeholder="Article" formControlName="term">
+        </mat-form-field>
+    
+        <mat-form-field class="espacement">
+          <mat-select placeholder="Domaine" formControlName="domaine">
+            <mat-option *ngFor="let domaine of domaines" [value]="domaine.value">
+              {{domaine.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field class="espacement">
+          <input type="text" placeholder="Ville" aria-label="Number" matInput formControlName="positionGeo" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let ville of villesOptions$ | async" [value]="ville.value">
+              {{ville.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>         
+              
+        <button mat-raised-button color="primary" type="submit" class="button2">Rechercher</button>        
+      <mat-slide-toggle  
+      (click)="positionValid()"
+      formControlName="positionAccept">
+          utiliser ma position géographique
+      </mat-slide-toggle>
+      </form>
+</div>
+<cc-place-dashboard></cc-place-dashboard>
