@@ -14,11 +14,21 @@ export class PlaceService {
   constructor(private http: HttpClient) { }
 
   getStore(data: Place): Observable<Place[]> {    
-    console.log('data', data['domaine']);
+    console.log('data', data.domaine);
     return this.http.get<Place[]>('../../assets/data/database.json' )
             .pipe(                            
               tap(res => console.log('avant filter',res)), 
               map(val => val.filter( evt => evt.domaine === data.domaine) )  ,                              
+              tap(res => console.log('Après filter', res)),                                       
+            )          
+  }
+
+  getStoreR(): Observable<Place[]> {    
+    //console.log('data', data['domaine']);
+    return this.http.get<Place[]>('../../assets/data/database.json' )
+            .pipe(                            
+              tap(res => console.log('avant filter',res)), 
+              map(val => val.filter( evt => evt.domaine === 'Informatique') )  ,                              
               tap(res => console.log('Après filter', res)),                                       
             )          
   }

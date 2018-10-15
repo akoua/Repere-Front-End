@@ -1,4 +1,5 @@
-<div *ngIf="!isSearch">
+
+<div *ngIf="!isSearch" (searchButton) ="valide($event)">
   <mat-card class="example-card">
   <mat-card-header>
     <mat-card-title>Recherche</mat-card-title>
@@ -73,4 +74,4 @@
       </mat-slide-toggle>
       </form>
 </div>
-<cc-place-dashboard></cc-place-dashboard>
+<cc-place-dashboard [domaine] = "domaine"></cc-place-dashboard>

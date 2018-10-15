@@ -12,6 +12,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from "ngx-pagination";
 
+//Ngrx
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducer } from './state/place.reducer';
+import { PlaceEffect } from './state/place.effects';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -28,7 +34,9 @@ import { NgxPaginationModule } from "ngx-pagination";
     MatInputModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    StoreModule.forFeature('placeStore', reducer),
+    EffectsModule.forFeature([PlaceEffect])
   ],
   declarations: [PlaceDashboardComponent, PlaceFindComponent],
   exports: [PlaceDashboardComponent, PlaceFindComponent]  

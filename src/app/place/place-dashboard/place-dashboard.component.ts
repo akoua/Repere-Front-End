@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
 import { Place } from '../../models/place.interface';
 import { PlaceService } from '../../services/place.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { getAllPlaces, getRequesTimeDate} from '../state/place.selectors';
 
 @Component({
   selector: 'cc-place-dashboard',
@@ -11,32 +14,39 @@ import { PlaceService } from '../../services/place.service';
 })
 export class PlaceDashboardComponent implements OnInit {
   /** Based on the screen size, switch from standard to one column per row */
-  results : Place[];
-  
+  @Input() domaine: string;
+  places$: Observable<Place[]>;
+  dateTime$: Observable<Date>;  
+
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
-      if (matches) {
+      //console.log('Appeler', this.x++ );
+      //this.places$.subscribe(data => this.domaine = data[0].domaine);       
+      if (matches) {     
         return [
-          { title: this.results[0].domaine , cols: 1, rows: 1 }                
+          { title: this.domaine, cols: 1, rows: 1 }
         ];
       }
-
+          
       return [
-        { title: this.results[0].domaine , cols: 1, rows: 1 }                
+        { title: this.domaine, cols: 1, rows: 1 }
       ];
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, private placeService: PlaceService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private store: Store<any>) { }
 
-  place: Place = {
-    "id": 2,
-    "name": "Bcc",
-    "domaine": "Informatique",
-    "position_geographique": "cocody"
-}
-  ngOnInit(): void {
-    this.placeService.getStore(this.place)
-                      .subscribe(data => this.results = data);    
+  ngOnInit(): void {       
+    this.places$ = this.store.select(getAllPlaces);
+    this.dateTime$ = this.store.select(getRequesTimeDate);     
+  }
+
+
+  viewCarte() {
+
+  }
+
+  passCommand() {
+
   }
 }

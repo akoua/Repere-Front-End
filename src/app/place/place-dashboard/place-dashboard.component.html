@@ -1,8 +1,12 @@
-<div class="grid-container">
+<div *ngIf="!domaine">
+  rien
+</div>
+
+<div class="grid-container" *ngIf="domaine">
   <h1 class="mat-h1 text-alignement">Resultat de la recherche</h1>
   <mat-grid-list cols="2" rowHeight="350px">
-    <!-- <div *ngFor="let place of results"> -->
-    <div *ngFor="let place of results | paginate: { itemsPerPage: 2, currentPage: p }">
+    <div *ngIf="(places$ | async)?.length">
+    <div *ngFor="let place of (places$ | async) | paginate: { itemsPerPage: 2, currentPage: p }">
         <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
             <mat-card class="dashboard-card">
               <mat-card-header>
@@ -12,19 +16,22 @@
                     <mat-icon>more_vert</mat-icon>
                   </button>
                   <mat-menu #menu="matMenu" xPosition="before">
-                    <button mat-menu-item>Expand</button>
-                    <button mat-menu-item>Remove</button>
+                    <button mat-menu-item (click)="viewCarte()" >Voir sur la carte</button>
+                    <button mat-menu-item (click)="passCommand()">Passer une commande</button>
                   </mat-menu>
                 </mat-card-title>
               </mat-card-header>
               <mat-card-content class="dashboard-card-content">
+                <strong>Nom: </strong>{{place.name}}
+                <br>
+                <strong>géographique:</strong>{{place.position_geographique}}
                 <div>{{place.name}}</div>
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>          
-    </div>      
+    </div>   
+    </div>   
   </mat-grid-list>   
+  <pagination-controls (pageChange)="p = $event"></pagination-controls> 
 </div>
-<pagination-controls (pageChange)="p = $event"></pagination-controls> 
-
-<!-- {{results | json}} -->
+{{results | json}}

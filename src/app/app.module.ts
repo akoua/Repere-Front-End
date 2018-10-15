@@ -11,6 +11,11 @@ import { PlaceModule } from './place/place.module';
 import { AppRoutingModule } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
 
+//Ngrx
+import { StoreModule } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { EffectsModule } from "@ngrx/effects";
+
 
 @NgModule({
   declarations: [
@@ -32,7 +37,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatMenuModule,
     PlaceModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      name: "ngrx_effects",
+      maxAge: 14 
+    }),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

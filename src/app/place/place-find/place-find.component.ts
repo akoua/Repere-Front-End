@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { PlaceService } from '../../services/place.service';
+import { Place } from '../../models/place.interface';
+import { Store } from '@ngrx/store';
+import { PlaceActions } from '../state/place.action';
+import { getAllPlaces, getRequesTimeDate } from '../state/place.selectors';
 
 @Component({
   selector: 'app-place-find',
@@ -14,6 +18,8 @@ export class PlaceFindComponent implements OnInit {
   private isSearch: boolean = false;
   private term: string;
   formFindPlace: FormGroup;
+  domaine: string;
+
   domaines = [
     {id:1, name:'Informatique', value:'Informatique'},
     {id:2, name:'restauration', value:'restauration'}
@@ -26,7 +32,7 @@ export class PlaceFindComponent implements OnInit {
 
   villesOptions$ : Observable<any>;
   
-  constructor(private formBuilder: FormBuilder, private PlaceService: PlaceService) { }
+  constructor(private formBuilder: FormBuilder, private store: Store<any>) { }
 
   ngOnInit() {
     this.createForm();
@@ -40,7 +46,7 @@ export class PlaceFindComponent implements OnInit {
   createForm(){
    this.formFindPlace = this.formBuilder.group({
       term: ['', Validators.required],
-      domaine: ['', Validators.required],
+      domaine: ['', Validators.required], 
       positionGeo: ['', Validators.required],
       positionAccept: false
     });
@@ -48,9 +54,10 @@ export class PlaceFindComponent implements OnInit {
 
   validerPlace(formData){
     //this.term = formData.controls.term.toLowerCase();
-    this.PlaceService.getStore(formData)
-        .subscribe();      
+    console.log('form', formData);  
+    this.store.dispatch(new PlaceActions.LoadClass(formData));
     this.isSearch = true;
+    this.domaine = formData.domaine;    
   }
 
   private _filter(value: string): string[] {
