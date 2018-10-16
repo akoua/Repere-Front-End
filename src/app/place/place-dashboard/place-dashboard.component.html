@@ -1,5 +1,5 @@
 <div *ngIf="!domaine">
-  rien
+  penser à ajouter un spinner pour faire le chargement
 </div>
 
 <div class="grid-container" *ngIf="domaine">
@@ -17,7 +17,7 @@
                   </button>
                   <mat-menu #menu="matMenu" xPosition="before">
                     <button mat-menu-item (click)="viewCarte()" >Voir sur la carte</button>
-                    <button mat-menu-item (click)="passCommand()">Passer une commande</button>
+                    <button mat-menu-item (click)="passCommand()">Passer une commande</button>                    
                   </mat-menu>
                 </mat-card-title>
               </mat-card-header>
